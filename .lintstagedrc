@@ -1,0 +1,5 @@
+%YAML 1.2
+---
+packages/**/*.{ts,js,json,md,html,css,scss}:
+  - yarn nx affected --target lint --uncommitted
+  - yarn nx format:check --uncommitted

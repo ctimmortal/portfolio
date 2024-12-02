@@ -1,0 +1,10 @@
+# generated files
+/dist
+/coverage
+
+# node
+/node_modules
+
+# nx
+/.nx/cache
+/.nx/workspace-data
