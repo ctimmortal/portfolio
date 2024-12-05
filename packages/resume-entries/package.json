@@ -1,0 +1,8 @@
+{
+  "name": "@portfolio/resume-entries",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts"
+}

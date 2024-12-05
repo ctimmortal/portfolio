@@ -1,39 +1,22 @@
 version: "0.2"
-ignorePaths:
-  - env.d.ts
+language: en
 dictionaries:
   - companies
   - computing-acronyms
-  - en_US
-  - en-GB
+  - en_us
+  - en-gb
   - filetypes
   - fonts
   - fullstack
+  - git
   - misc
   - networking-terms
   - npm
+  - scientific-terms-us
   - softwareTerms
   - web-services
-  - scientific-terms-us
-  - git
 words:
-  - analyte
-  - analytes
-  - cas
-  - casrn
-  - cssmodule
-  - deepcode
-  - gcms
-  - hplc
-  - icpms
-  - lcmsms
-  - lims
-  - passcode
   - rtfd
-  - svhc
-  - titrimetric
-  - tsdoc
-  - typecheck
 languageSettings:
   - languageId: javascript,typescript
     dictionaries:
@@ -50,3 +33,7 @@ languageSettings:
       - html-symbol-entities
       - npm
       - node
+ignorePaths:
+  - ./node_modules
+  - ./.nx
+  - ./.yarn

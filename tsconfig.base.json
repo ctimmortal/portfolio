@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "composite": true,
     "declaration": true,
     "declarationMap": true,
@@ -21,7 +22,9 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "paths": {},
+    "paths": {
+      "@portfolio/resume-entries": ["packages/resume-entries/src/index.ts"]
+    },
     "pretty": true,
     "removeComments": false,
     "resolveJsonModule": false,

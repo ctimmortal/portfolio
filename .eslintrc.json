@@ -1,0 +1,110 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx", "perfectionist", "unicorn", "jsdoc"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+
+    {
+      "files": ["*.ts", "*.mts", "*.cts", ".tsx", "*.js", "*.mjs", "*.cjs", "*.jsx"],
+      "extends": [
+        "plugin:perfectionist/recommended-natural-legacy",
+        "plugin:unicorn/recommended",
+        "plugin:jsdoc/recommended"
+      ],
+      "rules": {
+        "perfectionist/sort-imports": [
+          "warn",
+          {
+            "type": "natural",
+            "newlinesBetween": "always",
+            "groups": [
+              ["side-effect", "side-effect-style"],
+              "builtin",
+              "external",
+              "type",
+              "internal-type",
+              "internal",
+              ["parent-type", "sibling-type", "index-type"],
+              ["parent", "sibling", "index"],
+              "object",
+              "unknown"
+            ]
+          }
+        ],
+        "perfectionist/sort-enums": ["warn", { "forceNumericSort": true }],
+
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/no-array-reduce": "off",
+        "unicorn/no-array-callback-reference": "off",
+        "unicorn/prefer-number-properties": "off",
+        "unicorn/import-style": [
+          "warn",
+          {
+            "styles": {
+              "path": {
+                "named": true
+              }
+            }
+          }
+        ],
+        "unicorn/numeric-separators-style": [
+          "warn",
+          {
+            "number": {
+              "minimumDigits": 12
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "files": [
+        "*.cjs",
+        "jest.config.js",
+        "jest.preset.js",
+        "prettier.config.js",
+        "eslint.config.js",
+        "**/eslint.config.js"
+      ],
+      "rules": {
+        "unicorn/prefer-module": "off"
+      }
+    },
+
+    {
+      "files": ["*.json"],
+      "parser": "eslint-parser-jsonc"
+    }
+  ]
+}
