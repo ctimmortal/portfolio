@@ -37,9 +37,9 @@
     {
       "files": ["*.ts", "*.mts", "*.cts", ".tsx", "*.js", "*.mjs", "*.cjs", "*.jsx"],
       "extends": [
-        "plugin:perfectionist/recommended-natural-legacy",
         "plugin:unicorn/recommended",
-        "plugin:jsdoc/recommended"
+        "plugin:jsdoc/recommended-typescript",
+        "plugin:perfectionist/recommended-natural-legacy"
       ],
       "rules": {
         "perfectionist/sort-imports": [
@@ -62,6 +62,66 @@
           }
         ],
         "perfectionist/sort-enums": ["warn", { "forceNumericSort": true }],
+        "perfectionist/sort-union-types": [
+          "warn",
+          {
+            "ignoreCase": false,
+            "groups": [
+              "conditional",
+              "function",
+              "operator",
+              "literal",
+              "keyword",
+              "named",
+              "import",
+              "tuple",
+              "object",
+              ["intersection", "union"],
+              "nullish",
+              "unknown"
+            ]
+          }
+        ],
+        "perfectionist/sort-exports": ["warn", { "type": "natural" }],
+        "perfectionist/sort-named-imports": ["warn", { "type": "natural" }],
+        "perfectionist/sort-named-exports": ["warn", { "type": "natural", "groupKind": "values-first" }],
+        "perfectionist/sort-interfaces": "off",
+        "perfectionist/sort-classes": [
+          "warn",
+          {
+            "groups": [
+              "constructor",
+              "index-signature",
+              "static-block",
+              "accessor-property",
+              ["get-method", "set-method"],
+              "method",
+              "override-method",
+              "static-method",
+              "protected-method",
+              "private-method",
+              "protected-accessor-property",
+              "private-accessor-property"
+            ]
+          }
+        ],
+        "perfectionist/sort-modules": [
+          "warn",
+          {
+            "groups": [
+              "class",
+              "function",
+              ["interface", "type", "enum"],
+              [
+                "export-default-class",
+                "export-default-function",
+                "export-default-enum",
+                "export-default-type",
+                "export-default-interface"
+              ]
+            ]
+          }
+        ],
 
         "unicorn/prevent-abbreviations": "off",
         "unicorn/no-array-reduce": "off",
@@ -84,7 +144,12 @@
               "minimumDigits": 12
             }
           }
-        ]
+        ],
+
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-explicit-any": "off",
+
+        "jsdoc/require-jsdoc": "off"
       }
     },
 
@@ -105,6 +170,21 @@
     {
       "files": ["*.json"],
       "parser": "eslint-parser-jsonc"
+    },
+
+    {
+      "files": ["*.tsx", "*.jsx"],
+      "rules": {
+        "unicorn/filename-case": [
+          "error",
+          {
+            "cases": {
+              "pascalCase": true,
+              "kebabCase": true
+            }
+          }
+        ]
+      }
     }
   ]
 }

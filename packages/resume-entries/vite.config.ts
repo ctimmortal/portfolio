@@ -1,54 +1,53 @@
-/// <reference types='vitest' />
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import * as path from 'path'
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
+import path from 'node:path'
+
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
+import dts from 'vite-plugin-dts'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  root: __dirname,
-  cacheDir: '../../node_modules/.vite/packages/resume-entries',
-  plugins: [
-    nxViteTsPaths(),
-    nxCopyAssetsPlugin(['*.md']),
-    dts({ entryRoot: 'src', tsconfigPath: path.join(__dirname, 'tsconfig.lib.json') }),
-  ],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
-  // Configuration for building your library.
-  // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/packages/resume-entries',
-    emptyOutDir: true,
-    reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    emptyOutDir: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'resume-entries',
       fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
+      name: 'resume-entries',
     },
+    outDir: '../../dist/packages/resume-entries',
+    reportCompressedSize: true,
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [],
+      external: ['@portfolio/cased-array'],
     },
   },
+
+  cacheDir: '../../node_modules/.vite/packages/resume-entries',
+
+  plugins: [
+    nxViteTsPaths(),
+    nxCopyAssetsPlugin(['*.md']),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json'),
+    }),
+  ],
+
+  root: import.meta.dirname,
+
   test: {
-    watch: false,
-    globals: true,
+    coverage: {
+      provider: 'v8',
+      reportsDirectory: '../../coverage/packages/resume-entries',
+    },
     environment: 'node',
+    globals: false,
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
-    coverage: {
-      reportsDirectory: '../../coverage/packages/resume-entries',
-      provider: 'v8',
-    },
+    watch: true,
   },
 })

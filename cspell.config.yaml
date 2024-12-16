@@ -16,6 +16,7 @@ dictionaries:
   - softwareTerms
   - web-services
 words:
+  - bunx
   - rtfd
 languageSettings:
   - languageId: javascript,typescript

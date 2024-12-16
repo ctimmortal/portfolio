@@ -36,9 +36,18 @@
     "editor.wordWrapColumn": 88
   },
   "cSpell.enabled": true,
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/{info,lfs,logs,refs,objects}/**",
+    ".git/{index,*refs,*HEAD}",
+    ".vscode",
+    ".vscode-insiders"
+  ],
   "code-runner.executorMap": {
-    "javascript": "bun run",
-    "typescript": "bun run"
+    "javascript": "yarn exec",
+    "typescript": "yarn exec vite-node"
   },
   "docwriter.hotkey.mac": "⌥ + .",
   "editor.unicodeHighlight.allowedCharacters": {},
